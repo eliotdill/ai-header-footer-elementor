@@ -1,0 +1,384 @@
+/* ============================================================
+   AI Header & Footer for Elementor — Admin Styles
+   ============================================================ */
+
+/* Reset & base */
+.ahfe-wrap * {
+	box-sizing: border-box;
+}
+.ahfe-wrap {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	max-width: 1100px;
+	margin: 20px auto 0;
+	padding: 0 20px 60px;
+	color: #1e1e1e;
+}
+
+/* ── Logo bar ─────────────────────────────────────── */
+.ahfe-logo-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 28px 0 24px;
+	border-bottom: 1px solid #e5e7eb;
+	margin-bottom: 40px;
+}
+.ahfe-logo-text {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: #111827;
+	letter-spacing: -0.01em;
+}
+.ahfe-logo-by {
+	font-size: 0.85rem;
+	font-weight: 400;
+	color: #6b7280;
+	margin-left: 6px;
+}
+.ahfe-back-link {
+	font-size: 0.875rem;
+	color: #6b7280;
+	text-decoration: none;
+	transition: color 0.2s;
+}
+.ahfe-back-link:hover {
+	color: #111827;
+}
+
+/* ── Landing cards ────────────────────────────────── */
+.ahfe-landing-cards {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 24px;
+	margin-bottom: 48px;
+}
+
+.ahfe-card {
+	background: #fff;
+	border: 1px solid #e5e7eb;
+	border-radius: 12px;
+	padding: 32px 28px 28px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	transition: box-shadow 0.2s, border-color 0.2s;
+}
+.ahfe-card:hover {
+	box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+	border-color: #d1d5db;
+}
+.ahfe-card--primary {
+	border-color: #2563eb;
+	background: linear-gradient(135deg, #eff6ff 0%, #fff 60%);
+}
+.ahfe-card--primary:hover {
+	box-shadow: 0 6px 24px rgba(37, 99, 235, 0.15);
+}
+
+.ahfe-card-badge {
+	display: inline-block;
+	font-size: 0.7rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #92400e;
+	background: #fef3c7;
+	border: 1px solid #fde68a;
+	border-radius: 20px;
+	padding: 3px 10px;
+	margin-bottom: 16px;
+	align-self: flex-start;
+}
+
+.ahfe-card-icon {
+	font-size: 2rem !important;
+	color: #2563eb;
+	margin-bottom: 16px;
+	line-height: 1;
+}
+.ahfe-card--primary .ahfe-card-icon {
+	color: #2563eb;
+}
+
+.ahfe-card-title {
+	font-size: 1.05rem;
+	font-weight: 700;
+	color: #111827;
+	margin: 0 0 12px;
+	line-height: 1.3;
+}
+.ahfe-card-desc {
+	font-size: 0.875rem;
+	color: #6b7280;
+	line-height: 1.6;
+	margin: 0 0 24px;
+	flex: 1;
+}
+
+/* ── Buttons ──────────────────────────────────────── */
+.ahfe-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 10px 20px;
+	border-radius: 7px;
+	font-size: 0.875rem;
+	font-weight: 600;
+	text-decoration: none;
+	cursor: pointer;
+	border: 2px solid transparent;
+	transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+	white-space: nowrap;
+}
+.ahfe-btn--primary {
+	background: #2563eb;
+	color: #fff;
+	border-color: #2563eb;
+}
+.ahfe-btn--primary:hover {
+	background: #1d4ed8;
+	border-color: #1d4ed8;
+	color: #fff;
+}
+.ahfe-btn--outline {
+	background: transparent;
+	color: #2563eb;
+	border-color: #2563eb;
+}
+.ahfe-btn--outline:hover {
+	background: #eff6ff;
+	color: #1d4ed8;
+}
+.ahfe-btn--danger {
+	background: transparent;
+	color: #dc2626;
+	border-color: #dc2626;
+}
+.ahfe-btn--danger:hover {
+	background: #fef2f2;
+}
+.ahfe-btn--sm {
+	padding: 6px 14px;
+	font-size: 0.8rem;
+}
+
+/* ── Type sections (Template Manager) ────────────── */
+.ahfe-type-section {
+	background: #fff;
+	border: 1px solid #e5e7eb;
+	border-radius: 12px;
+	margin-bottom: 28px;
+	overflow: hidden;
+}
+.ahfe-type-header {
+	padding: 24px 28px 20px;
+	border-bottom: 1px solid #f3f4f6;
+	background: #f9fafb;
+}
+.ahfe-type-title {
+	font-size: 1.1rem;
+	font-weight: 700;
+	margin: 0 0 6px;
+	color: #111827;
+}
+.ahfe-type-desc {
+	font-size: 0.85rem;
+	color: #6b7280;
+	margin: 0;
+}
+.ahfe-type-body {
+	padding: 24px 28px;
+}
+
+/* ── Status bar ───────────────────────────────────── */
+.ahfe-status {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-wrap: wrap;
+	padding: 12px 16px;
+	border-radius: 8px;
+	background: #f3f4f6;
+	margin-bottom: 24px;
+}
+.ahfe-status--active {
+	background: #f0fdf4;
+	border: 1px solid #bbf7d0;
+}
+.ahfe-status--none {
+	background: #f9fafb;
+	border: 1px solid #e5e7eb;
+}
+.ahfe-status-dot {
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	background: #22c55e;
+	flex-shrink: 0;
+}
+.ahfe-status-dot--off {
+	background: #d1d5db;
+}
+.ahfe-status-label {
+	font-size: 0.875rem;
+	color: #374151;
+	flex: 1;
+}
+.ahfe-status-actions {
+	display: flex;
+	gap: 8px;
+	margin-left: auto;
+}
+
+/* ── Tabs ─────────────────────────────────────────── */
+.ahfe-tab-nav {
+	display: flex;
+	gap: 0;
+	border-bottom: 2px solid #e5e7eb;
+	margin-bottom: 20px;
+}
+.ahfe-tab-btn {
+	background: none;
+	border: none;
+	padding: 10px 20px;
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: #6b7280;
+	cursor: pointer;
+	border-bottom: 2px solid transparent;
+	margin-bottom: -2px;
+	transition: color 0.2s, border-color 0.2s;
+}
+.ahfe-tab-btn:hover {
+	color: #111827;
+}
+.ahfe-tab-btn--active {
+	color: #2563eb;
+	border-bottom-color: #2563eb;
+	font-weight: 600;
+}
+.ahfe-tab-panel {
+	display: none;
+}
+.ahfe-tab-panel--active {
+	display: block;
+}
+
+/* ── Form elements ────────────────────────────────── */
+.ahfe-form-inline {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+.ahfe-select {
+	padding: 9px 12px;
+	border: 1px solid #d1d5db;
+	border-radius: 7px;
+	font-size: 0.875rem;
+	color: #374151;
+	background: #fff;
+	min-width: 240px;
+	max-width: 100%;
+}
+.ahfe-select:focus {
+	outline: none;
+	border-color: #2563eb;
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+.ahfe-file-label {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	cursor: pointer;
+}
+.ahfe-file-input {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.ahfe-file-text {
+	display: inline-block;
+	padding: 9px 16px;
+	border: 1px dashed #d1d5db;
+	border-radius: 7px;
+	font-size: 0.875rem;
+	color: #6b7280;
+	background: #f9fafb;
+	transition: border-color 0.2s, color 0.2s;
+}
+.ahfe-file-label:hover .ahfe-file-text {
+	border-color: #2563eb;
+	color: #2563eb;
+}
+
+/* ── Notices ──────────────────────────────────────── */
+.ahfe-admin-notice {
+	padding: 12px 18px;
+	border-radius: 8px;
+	font-size: 0.875rem;
+	margin-bottom: 24px;
+	border-left: 4px solid transparent;
+}
+.ahfe-admin-notice--success {
+	background: #f0fdf4;
+	border-left-color: #22c55e;
+	color: #166534;
+}
+.ahfe-admin-notice--warning {
+	background: #fffbeb;
+	border-left-color: #f59e0b;
+	color: #92400e;
+}
+.ahfe-admin-notice--error {
+	background: #fef2f2;
+	border-left-color: #dc2626;
+	color: #991b1b;
+}
+.ahfe-notice-inline {
+	font-size: 0.875rem;
+	color: #6b7280;
+	font-style: italic;
+	margin: 0;
+}
+
+/* ── Footer tagline ───────────────────────────────── */
+.ahfe-footer-tagline {
+	margin-top: 48px;
+	padding-top: 24px;
+	border-top: 1px solid #e5e7eb;
+	font-size: 0.8rem;
+	color: #9ca3af;
+	text-align: center;
+}
+.ahfe-footer-tagline a {
+	color: #2563eb;
+	text-decoration: none;
+	font-weight: 600;
+}
+.ahfe-footer-tagline a:hover {
+	text-decoration: underline;
+}
+
+/* ── Responsive ───────────────────────────────────── */
+@media ( max-width: 900px ) {
+	.ahfe-landing-cards {
+		grid-template-columns: 1fr;
+	}
+}
+@media ( max-width: 640px ) {
+	.ahfe-status {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.ahfe-status-actions {
+		margin-left: 0;
+	}
+	.ahfe-form-inline {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
