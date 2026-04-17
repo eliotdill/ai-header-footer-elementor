@@ -89,6 +89,21 @@
 	margin-bottom: 16px;
 	align-self: flex-start;
 }
+.ahfe-card-badge--free {
+	color: #166534;
+	background: #dcfce7;
+	border-color: #bbf7d0;
+}
+
+/* ── Page title (Template Manager) ──────────────── */
+.ahfe-page-title {
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #111827;
+	margin: 0 0 28px;
+	padding: 0;
+	line-height: 1.2;
+}
 
 .ahfe-card-icon {
 	font-size: 2rem !important;

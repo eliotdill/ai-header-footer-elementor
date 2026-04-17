@@ -60,6 +60,7 @@ class AHFE_Admin {
 
 				<!-- Card 1: Plugin functionality -->
 				<div class="ahfe-card ahfe-card--primary">
+					<div class="ahfe-card-badge ahfe-card-badge--free"><?php esc_html_e( 'FREE – No Account Required', 'ai-hfe' ); ?></div>
 					<div class="ahfe-card-icon dashicons dashicons-layout"></div>
 					<h2 class="ahfe-card-title"><?php esc_html_e( 'Set a Header or Footer for Elementor', 'ai-hfe' ); ?></h2>
 					<p class="ahfe-card-desc"><?php esc_html_e( 'Upload or choose an Elementor template and set it as your site\'s global header or footer — no coding required.', 'ai-hfe' ); ?></p>
@@ -70,7 +71,7 @@ class AHFE_Admin {
 
 				<!-- Card 2: Convert site -->
 				<div class="ahfe-card">
-					<div class="ahfe-card-badge"><?php esc_html_e( 'Account Required', 'ai-hfe' ); ?></div>
+					<div class="ahfe-card-badge"><?php esc_html_e( 'FREE & PAID – Account Required', 'ai-hfe' ); ?></div>
 					<div class="ahfe-card-icon dashicons dashicons-art"></div>
 					<h2 class="ahfe-card-title"><?php esc_html_e( 'Convert a Site to a WordPress Theme with AI', 'ai-hfe' ); ?></h2>
 					<p class="ahfe-card-desc"><?php esc_html_e( 'Turn any existing website design into a fully editable WordPress theme in minutes using AI.', 'ai-hfe' ); ?></p>
@@ -81,7 +82,7 @@ class AHFE_Admin {
 
 				<!-- Card 3: Create theme -->
 				<div class="ahfe-card">
-					<div class="ahfe-card-badge"><?php esc_html_e( 'Account Required', 'ai-hfe' ); ?></div>
+					<div class="ahfe-card-badge"><?php esc_html_e( 'FREE & PAID – Account Required', 'ai-hfe' ); ?></div>
 					<div class="ahfe-card-icon dashicons dashicons-admin-customizer"></div>
 					<h2 class="ahfe-card-title"><?php esc_html_e( 'Create a Theme with AI', 'ai-hfe' ); ?></h2>
 					<p class="ahfe-card-desc"><?php esc_html_e( 'Design a custom WordPress theme from scratch using AI — no coding needed. Own your theme and host anywhere.', 'ai-hfe' ); ?></p>
@@ -113,6 +114,8 @@ class AHFE_Admin {
 				<span class="ahfe-logo-text">AI Header &amp; Footer <span class="ahfe-logo-by">by PressMeGPT</span></span>
 				<a href="<?php echo esc_url( $back_url ); ?>" class="ahfe-back-link">&larr; <?php esc_html_e( 'Back to Home', 'ai-hfe' ); ?></a>
 			</div>
+
+			<h1 class="ahfe-page-title"><?php esc_html_e( 'Template Manager', 'ai-hfe' ); ?></h1>
 
 			<?php if ( isset( $_GET['ahfe_notice'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification ?>
 				<?php self::render_notice( sanitize_text_field( wp_unslash( $_GET['ahfe_notice'] ) ) ); ?>

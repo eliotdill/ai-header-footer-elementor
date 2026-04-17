@@ -1,21 +1,16 @@
 <?php
 /**
- * Replacement footer template.
- * Loaded in place of the theme's footer.php when a footer template is set.
+ * Footer content template.
+ *
+ * Rendered via the wp_footer action — before </body>. The theme still owns
+ * wp_footer() and the closing </body></html>. We only inject visible footer
+ * content here; suppress_css hides the theme's native footer element.
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 $footer_id = AHFE_Renderer::get_template_id( 'footer' );
-?>
-
-<?php if ( $footer_id ) : ?>
-	<div class="ahfe-footer-wrap">
-		<?php AHFE_Renderer::render( $footer_id ); ?>
-	</div>
-<?php endif; ?>
-
-<?php wp_footer(); ?>
-</body>
-</html>
+if ( $footer_id ) {
+	AHFE_Renderer::render( $footer_id );
+}
