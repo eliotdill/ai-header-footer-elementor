@@ -6,30 +6,95 @@ if ( ! defined( 'ABSPATH' ) ) {
 class AHFE_Renderer {
 
 	public static function init(): void {
-		// Enqueue each active template's Elementor CSS before wp_head fires.
-		// Must happen in wp_enqueue_scripts, not at render time, because render
-		// happens in wp_body_open / wp_footer — both after wp_head has already fired.
+		// Enqueue Elementor CSS for active templates before wp_head fires.
 		add_action( 'wp_enqueue_scripts', [ __CLASS__, 'enqueue_template_styles' ] );
 
-		// Inject CSS that hides the theme's native header/footer elements
-		// so they don't stack on top of our Elementor templates.
-		add_action( 'wp_head', [ __CLASS__, 'inject_suppress_css' ], PHP_INT_MAX );
+		// Add body classes for active content types.
+		add_filter( 'body_class', [ __CLASS__, 'body_class' ] );
 
-		// Register each content type's injection hook from the registry.
+		// Register theme-page and canvas hooks on 'wp' (after the query is set up).
+		add_action( 'wp', [ __CLASS__, 'register_hooks' ] );
+	}
+
+	/**
+	 * Register hooks for each active content type.
+	 * Called on 'wp' so the current page context is available.
+	 */
+	public static function register_hooks(): void {
 		foreach ( AHFE_Content_Types::get_all() as $type ) {
-			$hook     = $type['hook'];
-			$priority = isset( $type['hook_priority'] ) ? (int) $type['hook_priority'] : 5;
-			$type_id  = $type['id'];
+			$template_id = (int) get_option( $type['option_key'], 0 );
+			if ( ! $template_id ) {
+				continue;
+			}
 
-			add_action( $hook, static function () use ( $type_id ) {
-				self::inject( $type_id );
-			}, $priority );
+			// Strategy A: intercept get_header / get_footer on standard theme pages.
+			// We output our full replacement template and silently discard the theme's file.
+			add_action( $type['hook'], static function () use ( $type ) {
+				AHFE_Renderer::override_theme_template( $type );
+			} );
+
+			// Strategy B: Elementor canvas pages (editor + canvas-template frontend pages).
+			// On these pages the theme's header/footer is never called — Elementor fires its
+			// own hooks around the page content.
+			if ( ! empty( $type['elementor_canvas_hook'] ) ) {
+				$priority = isset( $type['elementor_canvas_priority'] ) ? (int) $type['elementor_canvas_priority'] : 10;
+				add_action( $type['elementor_canvas_hook'], static function () use ( $type ) {
+					AHFE_Renderer::inject_canvas( $type );
+				}, $priority );
+			}
+		}
+	}
+
+	/**
+	 * Strategy A: Replace theme's header.php / footer.php.
+	 *
+	 * 1. Require our full replacement template (which calls wp_head() / wp_footer() and renders content).
+	 * 2. Remove all wp_head / wp_footer actions so they can't fire a second time.
+	 * 3. Load the theme's original file via locate_template() but discard its output.
+	 *
+	 * This is the same pattern as the competitor's HFE_Default_Compat::override_header().
+	 */
+	public static function override_theme_template( array $type ): void {
+		$template_file = AHFE_DIR . 'templates/' . $type['template'];
+		if ( ! file_exists( $template_file ) ) {
+			return;
+		}
+
+		// Output our replacement (contains full HTML structure + wp_head or wp_footer).
+		require $template_file;
+
+		// Prevent wp_head / wp_footer from firing again when the theme's file is loaded below.
+		if ( 'get_header' === $type['hook'] ) {
+			remove_all_actions( 'wp_head' );
+			$theme_file = 'header.php';
+		} else {
+			remove_all_actions( 'wp_footer' );
+			$theme_file = 'footer.php';
+		}
+
+		// Silently run and discard the theme's original file.
+		ob_start();
+		locate_template( [ $theme_file ], true );
+		ob_get_clean();
+	}
+
+	/**
+	 * Strategy B: Elementor canvas pages.
+	 *
+	 * On canvas pages (including inside the Elementor editor) the theme's header/footer
+	 * is not loaded. Elementor fires elementor/page_templates/canvas/before_content and
+	 * after_content. We just output the Elementor template content here — no HTML wrapper.
+	 */
+	public static function inject_canvas( array $type ): void {
+		$template_id = (int) get_option( $type['option_key'], 0 );
+		if ( $template_id ) {
+			self::render( $template_id );
 		}
 	}
 
 	/**
 	 * Enqueue Elementor-generated CSS for all active templates.
-	 * Called on wp_enqueue_scripts (before wp_head) so styles land in <head>.
+	 * Must run in wp_enqueue_scripts (before wp_head) so styles land in <head>.
 	 */
 	public static function enqueue_template_styles(): void {
 		if ( ! class_exists( '\Elementor\Core\Files\CSS\Post' ) ) {
@@ -44,46 +109,21 @@ class AHFE_Renderer {
 	}
 
 	/**
-	 * Output a <style> block that hides the theme's native header/footer elements.
-	 * Only emitted when our templates are active for that slot.
+	 * Add body classes for active content types.
 	 */
-	public static function inject_suppress_css(): void {
-		$css = '';
+	public static function body_class( array $classes ): array {
 		foreach ( AHFE_Content_Types::get_all() as $type ) {
 			$template_id = (int) get_option( $type['option_key'], 0 );
-			if ( $template_id && ! empty( $type['suppress_css'] ) ) {
-				$css .= $type['suppress_css'] . '{display:none!important;}';
+			if ( $template_id ) {
+				$classes[] = 'ahfe-' . $type['id'];
 			}
 		}
-		if ( $css ) {
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo '<style id="ahfe-suppress">' . $css . '</style>';
-		}
-	}
-
-	/**
-	 * Inject the Elementor template for a content type.
-	 * Hooked into wp_body_open (header) or wp_footer (footer).
-	 */
-	public static function inject( string $type_id ): void {
-		$type = AHFE_Content_Types::get( $type_id );
-		if ( ! $type ) {
-			return;
-		}
-
-		$template_id = (int) get_option( $type['option_key'], 0 );
-		if ( ! $template_id ) {
-			return;
-		}
-
-		echo '<div class="ahfe-' . esc_attr( $type_id ) . '-wrap">';
-		self::render( $template_id );
-		echo '</div>';
+		return $classes;
 	}
 
 	/**
 	 * Render Elementor template content by post ID.
-	 * CSS is already enqueued via enqueue_template_styles(); skip re-enqueue here.
+	 * CSS is already enqueued in wp_enqueue_scripts.
 	 */
 	public static function render( int $post_id ): void {
 		if ( ! $post_id ) {
