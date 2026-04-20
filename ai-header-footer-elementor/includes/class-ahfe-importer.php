@@ -48,10 +48,12 @@ class AHFE_Importer {
 		}
 
 		update_post_meta( $post_id, '_elementor_data', $elementor_data );
-		// Use 'page' (not 'section') so Elementor opens this template in full-width
-		// canvas mode rather than a constrained section preview.
+		// 'page' type (not 'section') gives full-width canvas in the editor.
 		update_post_meta( $post_id, '_elementor_template_type', 'page' );
 		update_post_meta( $post_id, '_elementor_edit_mode', 'builder' );
+		// Forces Elementor's editor to open this post with the canvas template
+		// (no theme header/footer wrapper), matching how the competitor plugin works.
+		update_post_meta( $post_id, '_wp_page_template', 'elementor_canvas' );
 		update_post_meta( $post_id, '_ahfe_content_type', $type_id );
 
 		// Regenerate Elementor CSS for this post.

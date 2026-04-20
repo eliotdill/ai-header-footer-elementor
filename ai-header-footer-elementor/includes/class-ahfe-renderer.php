@@ -21,9 +21,12 @@ class AHFE_Renderer {
 	}
 
 	/**
-	 * Ensure active templates use _elementor_template_type = 'page' so the editor
-	 * opens them full-width. Runs once per request; update_post_meta skips the write
-	 * if the value is already correct.
+	 * Ensure active templates have the correct meta for full-width editor mode:
+	 *   _elementor_template_type = 'page'   → full-width canvas preview in editor panel
+	 *   _wp_page_template = 'elementor_canvas' → editor opens with no theme wrapper
+	 *
+	 * Runs on every request but update_post_meta skips the DB write when the value
+	 * is already correct, so there's no meaningful overhead.
 	 */
 	public static function maybe_upgrade_template_types(): void {
 		foreach ( AHFE_Content_Types::get_all() as $type ) {
@@ -31,9 +34,13 @@ class AHFE_Renderer {
 			if ( ! $template_id ) {
 				continue;
 			}
-			$current = get_post_meta( $template_id, '_elementor_template_type', true );
-			if ( 'page' !== $current ) {
+
+			if ( 'page' !== get_post_meta( $template_id, '_elementor_template_type', true ) ) {
 				update_post_meta( $template_id, '_elementor_template_type', 'page' );
+			}
+
+			if ( 'elementor_canvas' !== get_post_meta( $template_id, '_wp_page_template', true ) ) {
+				update_post_meta( $template_id, '_wp_page_template', 'elementor_canvas' );
 			}
 		}
 	}
