@@ -48,7 +48,9 @@ class AHFE_Importer {
 		}
 
 		update_post_meta( $post_id, '_elementor_data', $elementor_data );
-		update_post_meta( $post_id, '_elementor_template_type', 'section' );
+		// Use 'page' (not 'section') so Elementor opens this template in full-width
+		// canvas mode rather than a constrained section preview.
+		update_post_meta( $post_id, '_elementor_template_type', 'page' );
 		update_post_meta( $post_id, '_elementor_edit_mode', 'builder' );
 		update_post_meta( $post_id, '_ahfe_content_type', $type_id );
 
