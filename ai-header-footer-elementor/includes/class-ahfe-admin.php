@@ -117,6 +117,13 @@ class AHFE_Admin {
 
 			<h1 class="ahfe-page-title"><?php esc_html_e( 'Template Manager', 'ai-hfe' ); ?></h1>
 
+			<div class="ahfe-instructions">
+				<p>
+					<?php esc_html_e( 'To set a global header and/or footer on your Elementor pages, simply upload or select an Elementor Template that contains your header or footer, optionally edit any sections with the editor, and publish. If you don\'t have a header or footer template for Elementor, you can use AI to generate a website that includes both header and footer templates with ', 'ai-hfe' ); ?>
+					<a href="https://www.pressmegpt.com" target="_blank" rel="noopener noreferrer">PressMeGPT.com</a>.
+				</p>
+			</div>
+
 			<?php if ( isset( $_GET['ahfe_notice'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification ?>
 				<?php self::render_notice( sanitize_text_field( wp_unslash( $_GET['ahfe_notice'] ) ) ); ?>
 			<?php endif; ?>

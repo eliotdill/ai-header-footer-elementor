@@ -177,6 +177,30 @@
 	font-size: 0.8rem;
 }
 
+/* ── Instructions box ────────────────────────────── */
+.ahfe-instructions {
+	background: #f0f7ff;
+	border: 1px solid #bfdbfe;
+	border-left: 4px solid #2563eb;
+	border-radius: 8px;
+	padding: 16px 20px;
+	margin-bottom: 28px;
+}
+.ahfe-instructions p {
+	margin: 0;
+	font-size: 0.875rem;
+	color: #374151;
+	line-height: 1.65;
+}
+.ahfe-instructions a {
+	color: #2563eb;
+	font-weight: 600;
+	text-decoration: none;
+}
+.ahfe-instructions a:hover {
+	text-decoration: underline;
+}
+
 /* ── Type sections (Template Manager) ────────────── */
 .ahfe-type-section {
 	background: #fff;
