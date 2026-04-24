@@ -15,8 +15,8 @@ class AHFE_Admin {
 
 	public static function register_menu(): void {
 		add_menu_page(
-			__( 'AI Header & Footer', 'ai-hfe' ),
-			__( 'AI Header & Footer', 'ai-hfe' ),
+			__( 'PressMeGPT – Header & Footer', 'ai-hfe' ),
+			__( 'PressMeGPT – Header & Footer', 'ai-hfe' ),
 			'manage_options',
 			'ai-header-footer',
 			[ __CLASS__, 'render_landing_page' ],
@@ -53,7 +53,7 @@ class AHFE_Admin {
 		<div class="ahfe-wrap">
 
 			<div class="ahfe-logo-bar">
-				<span class="ahfe-logo-text">AI Header &amp; Footer <span class="ahfe-logo-by">by PressMeGPT</span></span>
+				<span class="ahfe-logo-text">PressMeGPT <span class="ahfe-logo-by">– Header &amp; Footer for Elementor</span></span>
 			</div>
 
 			<div class="ahfe-landing-cards">
@@ -111,7 +111,7 @@ class AHFE_Admin {
 		<div class="ahfe-wrap">
 
 			<div class="ahfe-logo-bar">
-				<span class="ahfe-logo-text">AI Header &amp; Footer <span class="ahfe-logo-by">by PressMeGPT</span></span>
+				<span class="ahfe-logo-text">PressMeGPT <span class="ahfe-logo-by">– Header &amp; Footer for Elementor</span></span>
 				<a href="<?php echo esc_url( $back_url ); ?>" class="ahfe-back-link">&larr; <?php esc_html_e( 'Back to Home', 'ai-hfe' ); ?></a>
 			</div>
 

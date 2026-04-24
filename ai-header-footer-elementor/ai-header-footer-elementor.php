@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       AI Header & Footer for Elementor by PressMeGPT
+ * Plugin Name:       PressMeGPT – Header & Footer for Elementor
  * Plugin URI:        https://pressmegpt.com
  * Description:       Set any Elementor template as your site's global header or footer. Upload an Elementor JSON file or choose from your existing templates.
  * Version:           1.0.0

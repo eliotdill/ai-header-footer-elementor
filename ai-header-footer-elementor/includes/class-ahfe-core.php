@@ -49,7 +49,7 @@ class AHFE_Core {
 		?>
 		<div class="notice notice-error">
 			<p>
-				<strong><?php esc_html_e( 'AI Header & Footer for Elementor', 'ai-hfe' ); ?></strong>
+				<strong><?php esc_html_e( 'PressMeGPT – Header & Footer for Elementor', 'ai-hfe' ); ?></strong>
 				<?php esc_html_e( 'requires Elementor to be installed and active.', 'ai-hfe' ); ?>
 			</p>
 		</div>

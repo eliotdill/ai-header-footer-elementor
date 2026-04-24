@@ -1,4 +1,4 @@
-=== AI Header & Footer for Elementor by PressMeGPT ===
+=== PressMeGPT – Header & Footer for Elementor ===
 Contributors: pressmegpt
 Tags: elementor, header, footer, template, page-builder
 Requires at least: 5.9
@@ -12,7 +12,7 @@ Set any Elementor template as your site's global header and footer — upload a 
 
 == Description ==
 
-**AI Header & Footer for Elementor** is a free helper plugin for [PressMeGPT.com](https://www.pressmegpt.com) — the AI-powered WordPress theme generator and website builder. It lets you apply a global header and footer to your Elementor-built site without needing Elementor Pro.
+**PressMeGPT – Header & Footer for Elementor** is a free helper plugin for [PressMeGPT.com](https://www.pressmegpt.com) — the AI-powered WordPress theme generator and website builder. It lets you apply a global header and footer to your Elementor-built site without needing Elementor Pro.
 
 When you generate a website with PressMeGPT, your exported theme includes Elementor JSON files for the header and footer. This plugin lets you upload those files and set them as the sitewide header and footer — displayed on every page, in both the browser and the Elementor editor.
 
@@ -50,7 +50,7 @@ You don't need a PressMeGPT account to use this plugin. Any Elementor template e
 1. Upload the `ai-header-footer-elementor` folder to the `/wp-content/plugins/` directory, or install directly from the WordPress plugin directory.
 2. Activate the plugin through the **Plugins** screen in WordPress.
 3. Make sure Elementor is installed and active.
-4. Go to **AI Header & Footer** in the WordPress admin sidebar.
+4. Go to **PressMeGPT – Header & Footer** in the WordPress admin sidebar.
 5. Click **Get Started** to open the Template Manager.
 6. Upload an Elementor JSON file for your header and/or footer, or select an existing Elementor library template.
 7. Click **Set as Header** or **Set as Footer** — your templates are now active sitewide.
