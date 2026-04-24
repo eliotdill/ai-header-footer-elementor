@@ -48,8 +48,20 @@ class AHFE_Renderer {
 	/**
 	 * Register hooks for each active content type.
 	 * Called on 'wp' so the current page context is available.
+	 *
+	 * Only runs on real public frontend page loads — not in the admin, not during
+	 * AJAX requests (wp-admin/admin-ajax.php), and not during REST API requests.
+	 * This prevents our remove_all_actions('wp_head') call in override_theme_template
+	 * from nuking hooks that third-party tools (e.g. Plugin Check) rely on during
+	 * their own AJAX or admin requests.
 	 */
 	public static function register_hooks(): void {
+		// Bail in admin, AJAX, and REST contexts — header/footer replacement only
+		// makes sense on public-facing page loads.
+		if ( is_admin() || wp_doing_ajax() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+			return;
+		}
+
 		foreach ( AHFE_Content_Types::get_all() as $type ) {
 			$template_id = (int) get_option( $type['option_key'], 0 );
 			if ( ! $template_id ) {
